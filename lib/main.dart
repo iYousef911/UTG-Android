@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:utg_flutter/Models/Game.dart';
 
+import 'DetailView.dart';
+
 
 Future<List<Game>> fetchGames(http.Client client) async {
   final response =
@@ -72,11 +74,12 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Padding(
-        child: FutureBuilder<List<Game>>(
+
+        body: FutureBuilder<List<Game>>(
           future: fetchGames(http.Client()),
           builder: (context, snapshot) {
             if (snapshot.hasError) print(snapshot.error);
@@ -86,8 +89,6 @@ class MyHomePage extends StatelessWidget {
                 : Center(child: CircularProgressIndicator());
           },
         ),
-        padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
-      ),
     );
   }
 }
@@ -109,7 +110,7 @@ class GameList extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SecondRoute(),
+                    builder: (context) => DetailView(games: games[index]),
                   ),
                 );
               },
@@ -166,27 +167,6 @@ class GameList extends StatelessWidget {
           }
 
 
-      ),
-    );
-  }
-}
-
-class SecondRoute extends StatelessWidget {
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Second Route"),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            // Navigate back to first route when tapped.
-          },
-          child: Text('Go back!'),
-        ),
       ),
     );
   }

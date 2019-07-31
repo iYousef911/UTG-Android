@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "829314870572",
+    "firebase_url": "https://azkarpro.firebaseio.com",
+    "project_id": "azkarpro",
+    "storage_bucket": "azkarpro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829314870572:android:5d053f2744d1948d",
+        "android_client_info": {
+          "package_name": "com.yatechno.utg_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829314870572-94pmq1lvqts0h39m3c5k1ksh2tb1qe3l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yatechno.utg_flutter",
+            "certificate_hash": "6aa282ab484fd1ce0a5fb05330afb9938b0387d8"
+          }
+        },
+        {
+          "client_id": "829314870572-p0ne2qmlr2h93pol7c1bt47vg7aa5074.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrMXcErnTCTd0FFcoXlmoLJ18zHO8mJCw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829314870572-p0ne2qmlr2h93pol7c1bt47vg7aa5074.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "829314870572-e8rhqm9qui10h4tdlq0rg5oakfnqve6k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ya-techno.gameRelease-Swift",
+                "app_store_id": "1179880599"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
