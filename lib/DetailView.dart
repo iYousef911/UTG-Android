@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'Models/Game.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_youtube/flutter_youtube.dart';
+
 
 class DetailView extends StatelessWidget {
   final Game games;
@@ -30,6 +32,7 @@ class DetailView extends StatelessWidget {
               child: Image.network("https://ya-techno.com/gamesImage/${games.image}",
               ),
           ),
+
            ),
           Text(games.gameName, style: TextStyle(
             color: Colors.white,
@@ -42,6 +45,16 @@ class DetailView extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),),
 
+
+
+
+
+          FlutterYoutube.playYoutubeVideoById(
+          apiKey: "AIzaSyByaDU-i3qdOJMqZzwzLvk3VBgzalrFFyU",
+          videoId: games.gameVideo,
+          autoPlay: true, //default falase
+          fullScreen: true //default false
+          ),
           InkWell(
               child: Text("${games.gameSite} Website",style: TextStyle(
 
@@ -54,6 +67,7 @@ class DetailView extends StatelessWidget {
             },
           ),
         ],
+
 
       ),
     );

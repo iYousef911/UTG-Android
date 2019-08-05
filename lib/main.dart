@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:utg_flutter/Models/Game.dart';
 
 import 'DetailView.dart';
+import 'ReleasedView.dart';
 
 
 Future<List<Game>> fetchGames(http.Client client) async {
@@ -71,13 +72,70 @@ class MyHomePage extends StatelessWidget {
 
   MyHomePage({Key key, this.title}) : super(key: key);
 
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+
+            children: <Widget>[
+        DrawerHeader(
+        child: Text('UTG - Up To Game', style: TextStyle(
+          color: Colors.white,
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          fontStyle: FontStyle.italic,
+        ),),
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(50, 66, 80, 1.0),
+        ),
+      ),
+              ListTile(
+                title: Text("Upcoming Game", style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: Colors.black,
+                ),),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyHomePage(),
+                    ),
+                  );
+                },
+
+              ),
+              ListTile(
+                title: Text("Released Game", style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: Colors.black,
+                ),),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ReleasedView(),
+                    ),
+                  );
+                },
+              ),
+    ])
+    ),
       backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text(title),
       ),
+
 
         body: FutureBuilder<List<Game>>(
           future: fetchGames(http.Client()),

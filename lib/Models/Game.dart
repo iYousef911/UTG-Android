@@ -6,8 +6,9 @@ class Game {
   final String image;
   final String gameDate;
   final String gameSite;
+  final String gameVideo;
 
-  Game({this.gameName, this.image, this.gameDate, this.gameSite});
+  Game({this.gameName, this.image, this.gameDate, this.gameSite, this.gameVideo});
 
 
 
@@ -17,6 +18,8 @@ class Game {
       image: json['image'] as String,
       gameDate: json['gameDate'] as String,
       gameSite: json['gameSite'] as String,
+      gameVideo: json['gameVideo'] as String,
+
     );
   }
 }
