@@ -25,26 +25,6 @@ List<Game> parseGames(String responseBody) {
   return parsed.map<Game>((json) => Game.fromJson(json)).toList();
 }
 
-//class Photo {
-//  final int albumId;
-//  final int id;
-//  final String title;
-//  final String url;
-//  final String thumbnailUrl;
-//
-//  Photo({this.albumId, this.id, this.title, this.url, this.thumbnailUrl});
-//
-//  factory Photo.fromJson(Map<String, dynamic> json) {
-//    return Photo(
-//      albumId: json['albumId'] as int,
-//      id: json['id'] as int,
-//      title: json['title'] as String,
-//      url: json['url'] as String,
-//      thumbnailUrl: json['thumbnailUrl'] as String,
-//    );
-//  }
-//}
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -130,13 +110,13 @@ class MyHomePage extends StatelessWidget {
                 },
               ),
     ])
+
     ),
+
       backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text(title),
       ),
-
-
         body: FutureBuilder<List<Game>>(
           future: fetchGames(http.Client()),
           builder: (context, snapshot) {
@@ -160,72 +140,69 @@ class GameList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-      body: new ListView.builder(
-          itemCount: games == null ? 0 : games.length,
-          itemBuilder:(BuildContext context, int index) {
-            return InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailView(games: games[index]),
-                  ),
-                );
-              },
+      body: ListView.builder(
+           itemCount: games == null ? 0 : games.length,
+           itemBuilder:(BuildContext context, int index) {
+             return InkWell(
+               onTap: () {
+                 Navigator.push(
+                   context,
+                   MaterialPageRoute(
+                     builder: (context) => DetailView(games: games[index]),
+                   ),
+                 );
+               },
 
-              child: Card(
-                elevation: 8.0,
-                color: Color.fromRGBO(58, 66, 86, 1.0),
-                margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-                shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(15),
+               child: Card(
+                 elevation: 8.0,
+                 color: Color.fromRGBO(58, 66, 86, 1.0),
+                 margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+                 shape: new RoundedRectangleBorder(
+                   borderRadius: new BorderRadius.circular(15),
 
-                ),
+                 ),
 
-                child: Column(
+                 child: Column(
+                   children: <Widget>[
 
+                     Padding(
+                       padding: const EdgeInsets.all(0.0),
+                       child: ClipRRect(
+                         borderRadius: new BorderRadius.circular(8.0),
+                         child: Image.network("https://ya-techno.com/gamesImage/${games[index].image}",
+                         ),
 
+                       ),
 
-                  children: <Widget>[
+                     ),
 
-                    Padding(
-                      padding: const EdgeInsets.all(0.0),
-                      child: ClipRRect(
-                        borderRadius: new BorderRadius.circular(8.0),
-                        child: Image.network("https://ya-techno.com/gamesImage/${games[index].image}",
-                        ),
+                     Padding(
+                       padding: const EdgeInsets.all(5.0),
+                       child: Text(games[index].gameName,
+                         style: TextStyle(
+                             color: Colors.white,
+                             fontWeight: FontWeight.bold,
+                             fontSize: 20
+                         ),
+                       ),
 
-                      ),
-
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(games[index].gameName,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20
-                        ),
-                      ),
-
-                    )
+                     )
 
 
-                  ],
-                ),
+                   ],
+                 ),
 
-              ),
+               ),
 
-            );
+             );
 
 
 
 
-          }
+           }
 
 
-      ),
+       ),
     );
   }
 }
