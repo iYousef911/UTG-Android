@@ -43,13 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
-  countdown:
-    dependency: "direct main"
-    description:
-      name: countdown
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0"
   crypto:
     dependency: transitive
     description:
@@ -64,6 +57,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2"
+  facebook_audience_network:
+    dependency: "direct main"
+    description:
+      name: facebook_audience_network
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.3"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -198,6 +198,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.5"
+  transparent_image:
+    dependency: "direct main"
+    description:
+      name: transparent_image
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   typed_data:
     dependency: transitive
     description:

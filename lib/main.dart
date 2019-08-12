@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:utg_flutter/Models/Game.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import 'DetailView.dart';
 import 'ReleasedView.dart';
@@ -41,6 +43,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color.fromRGBO(58, 66, 86, 1.0),
         primarySwatch: Colors.red,
+        canvasColor: Color.fromRGBO(58, 66, 86, 1.0),
       ),
       home: MyHomePage(title: 'Upcoming Games'),
     );
@@ -75,14 +78,19 @@ class MyHomePage extends StatelessWidget {
           fontStyle: FontStyle.italic,
         ),),
         decoration: BoxDecoration(
-          color: Color.fromRGBO(50, 66, 80, 1.0),
+          image: new DecorationImage(
+            image: new NetworkImage("https://ya-techno.com/backgroundImage/tableViewHeader1.jpg"),
+            fit: BoxFit.cover,
+          ),
+          color: Color.fromRGBO(58, 66, 86, 1.0),
         ),
       ),
               ListTile(
+                leading: Icon(Icons.gamepad),
                 title: Text("Upcoming Game", style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  color: Colors.black,
+                  fontSize: 18,
+                  color: Colors.white,
                 ),),
                 onTap: () {
                   Navigator.push(
@@ -95,10 +103,11 @@ class MyHomePage extends StatelessWidget {
 
               ),
               ListTile(
+                leading: Icon(Icons.videogame_asset),
                 title: Text("Released Game", style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  color: Colors.black,
+                  fontSize: 18,
+                  color: Colors.white,
                 ),),
                 onTap: () {
                   Navigator.push(
@@ -169,8 +178,11 @@ class GameList extends StatelessWidget {
                        padding: const EdgeInsets.all(0.0),
                        child: ClipRRect(
                          borderRadius: new BorderRadius.circular(8.0),
-                         child: Image.network("https://ya-techno.com/gamesImage/${games[index].image}",
-                         ),
+                       child: FadeInImage.memoryNetwork(
+                         placeholder: kTransparentImage,
+                         image: "https://ya-techno.com/gamesImage/${games[index].image}",
+                       ),
+
 
                        ),
 

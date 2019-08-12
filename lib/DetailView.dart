@@ -6,42 +6,41 @@ import 'main.dart';
 import 'Models/Game.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:countdown/countdown.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:transparent_image/transparent_image.dart';
+import 'package:facebook_audience_network/facebook_audience_network.dart';
+
 
 
 
 class DetailView extends StatelessWidget {
   final Game games;
 
+
   const DetailView({Key key, this.games}) : super(key: key);
 
+  @override
+  
 
-
-  main() {
-
-    CountDown cd = CountDown(Duration(seconds : 10));
-    var sub = cd.stream.listen(null);
-
-    sub.onData((Duration d) {
-      print(d);
-    });
-
-    sub.onDone(() {
-      print("done");
-    });
-
-    /// the countdown will have 500ms delay
-    Timer(Duration(milliseconds: 4000), () {
-      sub.pause();
-    });
-    Timer(Duration(milliseconds: 4500), () {
-      sub.resume();
-    });
-
+  void _loadInterstitialAd() {
+    FacebookInterstitialAd.loadInterstitialAd(
+      placementId: "YOUR_PLACEMENT_ID",
+      listener: (result, value) {
+        print("Interstitial Ad: $result --> $value");
+        if (result == InterstitialAdResult.LOADED)
+          _isInterstitialAdLoaded = true;
+        /// Once an Interstitial Ad has been dismissed and becomes invalidated,
+        /// load a fresh Ad by calling this function.
+        if (result == InterstitialAdResult.DISMISSED &&
+            value["invalidated"] == true) {
+          _isInterstitialAdLoaded = false;
+          _loadInterstitialAd();
+        }
+      },
+    );
   }
 
 
-  @override
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,11 +51,40 @@ class DetailView extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children:[
+          Container(
+            alignment: Alignment(0,1),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FacebookBannerAd(
+                placementId: "365255217325571_668274580356965",
+                bannerSize: BannerSize.STANDARD,
+                listener: (result, value) {
+                  switch (result) {
+                    case BannerAdResult.ERROR:
+                      print("Error: $value");
+                      break;
+                    case BannerAdResult.LOADED:
+                      print("Loaded: $value");
+                      break;
+                    case BannerAdResult.CLICKED:
+                      print("Clicked: $value");
+                      break;
+                    case BannerAdResult.LOGGING_IMPRESSION:
+                      print("Logging Impression: $value");
+                      break;
+                  }
+                },
+
+              ),
+            ),
+          ),
            Padding(
              padding: const EdgeInsets.all(8.0),
              child: ClipRRect(
               borderRadius: new BorderRadius.circular(10.0),
-              child: Image.network("https://ya-techno.com/gamesImage/${games.image}",
+              child: FadeInImage.memoryNetwork(
+                placeholder: kTransparentImage,
+                image: "https://ya-techno.com/gamesImage/${games.image}",
               ),
           ),
 
@@ -66,7 +94,8 @@ class DetailView extends StatelessWidget {
             fontSize: 17,
             fontWeight: FontWeight.bold,
           ),),
-          Text(games.gameDate, style: TextStyle(
+          Text("Release Date: " + games.gameDate,
+            style: TextStyle(
             color: Colors.white,
             fontSize: 17,
             fontWeight: FontWeight.bold,
@@ -87,24 +116,31 @@ class DetailView extends StatelessWidget {
 
             },
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: YoutubePlayer(
-              context: context,
-              videoId: games.gameVideo,
-              flags: YoutubePlayerFlags(
-                autoPlay: false,
-                showVideoProgressIndicator: true,
-              ),
-              videoProgressIndicatorColor: Colors.amber,
-            ),
-          ),
+//          Padding(
+//            padding: const EdgeInsets.all(8.0),
+//            child: YoutubePlayer(
+//              context: context,
+//              videoId: games.gameVideo,
+//              flags: YoutubePlayerFlags(
+//                autoPlay: false,
+//                showVideoProgressIndicator: true,
+//              ),
+//              videoProgressIndicatorColor: Colors.amber,
+//            ),
+//          ),
+
+
+
+
+
 
         ],
+
 
 
       ),
     );
   }
 }
+
 

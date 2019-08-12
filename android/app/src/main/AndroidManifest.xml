@@ -10,7 +10,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="UTG - Up To Game"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/icon_original">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
