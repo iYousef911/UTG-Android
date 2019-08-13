@@ -150,10 +150,10 @@ class GameList extends StatelessWidget {
 
 
                   children: <Widget>[
-                    FadeInImage.memoryNetwork(
-                      placeholder: kTransparentImage,
-                      image: "https://ya-techno.com/gamesImage/${games[index].image}",
-                    ),
+                    CachedNetworkImage(
+                          placeholder: (context, url) => CircularProgressIndicator(),
+                         imageUrl: "https://ya-techno.com/gamesImage/${games[index].image}",
+                        ),
 
 //                    Padding(
 //                      padding: const EdgeInsets.all(0.0),

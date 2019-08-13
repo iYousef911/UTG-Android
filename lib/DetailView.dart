@@ -5,12 +5,9 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'Models/Game.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:transparent_image/transparent_image.dart';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
-
-
+import 'package:flutter_youtube/flutter_youtube.dart';
 
 
 class DetailView extends StatelessWidget {
@@ -21,24 +18,6 @@ class DetailView extends StatelessWidget {
 
   @override
   
-
-  void _loadInterstitialAd() {
-    FacebookInterstitialAd.loadInterstitialAd(
-      placementId: "YOUR_PLACEMENT_ID",
-      listener: (result, value) {
-        print("Interstitial Ad: $result --> $value");
-        if (result == InterstitialAdResult.LOADED)
-          _isInterstitialAdLoaded = true;
-        /// Once an Interstitial Ad has been dismissed and becomes invalidated,
-        /// load a fresh Ad by calling this function.
-        if (result == InterstitialAdResult.DISMISSED &&
-            value["invalidated"] == true) {
-          _isInterstitialAdLoaded = false;
-          _loadInterstitialAd();
-        }
-      },
-    );
-  }
 
 
 
@@ -51,40 +30,14 @@ class DetailView extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children:[
-          Container(
-            alignment: Alignment(0,1),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FacebookBannerAd(
-                placementId: "365255217325571_668274580356965",
-                bannerSize: BannerSize.STANDARD,
-                listener: (result, value) {
-                  switch (result) {
-                    case BannerAdResult.ERROR:
-                      print("Error: $value");
-                      break;
-                    case BannerAdResult.LOADED:
-                      print("Loaded: $value");
-                      break;
-                    case BannerAdResult.CLICKED:
-                      print("Clicked: $value");
-                      break;
-                    case BannerAdResult.LOGGING_IMPRESSION:
-                      print("Logging Impression: $value");
-                      break;
-                  }
-                },
-
-              ),
-            ),
-          ),
+          
            Padding(
              padding: const EdgeInsets.all(8.0),
              child: ClipRRect(
               borderRadius: new BorderRadius.circular(10.0),
-              child: FadeInImage.memoryNetwork(
-                placeholder: kTransparentImage,
-                image: "https://ya-techno.com/gamesImage/${games.image}",
+              child: CachedNetworkImage(
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                imageUrl: "https://ya-techno.com/gamesImage/${games.image}",
               ),
           ),
 
@@ -116,6 +69,7 @@ class DetailView extends StatelessWidget {
 
             },
           ),
+          
 //          Padding(
 //            padding: const EdgeInsets.all(8.0),
 //            child: YoutubePlayer(
@@ -128,16 +82,53 @@ class DetailView extends StatelessWidget {
 //              videoProgressIndicatorColor: Colors.amber,
 //            ),
 //          ),
+              // FlutterYoutube.playYoutubeVideoById(
+              //   apiKey: "AIzaSyAoFA4MZSqtqKkxVbtiP4XORLzkZX5gEBM",
+              //   videoId: games.gameVideo,
+              //   autoPlay: false, //default falase
+              //   fullScreen: false //default false
+              // ),
+              FlutterYoutube.playYoutubeVideoByUrl(
+                apiKey: "AIzaSyADzf8sBxEHO7enNBYLwhtAqlKRpROPj6Q",
+                videoUrl: "https://www.youtube.com/watch?v=-ICZM2CUe9k",
+
+              ),
 
 
 
+Container(
+            alignment: Alignment(0.5, 1.0),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FacebookBannerAd(
+                placementId: "365255217325571_668274580356965",
+                bannerSize: BannerSize.STANDARD,
+                listener: (result, value) {
+                  switch (result) {
+                    case BannerAdResult.ERROR:
+                      print("Error: $value");
+                      break;
+                    case BannerAdResult.LOADED:
+                      print("Loaded: $value");
+                      break;
+                    case BannerAdResult.CLICKED:
+                      print("Clicked: $value");
+                      break;
+                    case BannerAdResult.LOGGING_IMPRESSION:
+                      print("Logging Impression: $value");
+                      break;
+                  }
+                },
 
-
-
+              ),
+              
+            ),
+            
+            
+            
+          ),
+      
         ],
-
-
-
       ),
     );
   }

@@ -178,10 +178,10 @@ class GameList extends StatelessWidget {
                        padding: const EdgeInsets.all(0.0),
                        child: ClipRRect(
                          borderRadius: new BorderRadius.circular(8.0),
-                       child: FadeInImage.memoryNetwork(
-                         placeholder: kTransparentImage,
-                         image: "https://ya-techno.com/gamesImage/${games[index].image}",
-                       ),
+                          child: CachedNetworkImage(
+                          placeholder: (context, url) => CircularProgressIndicator(),
+                         imageUrl: "https://ya-techno.com/gamesImage/${games[index].image}",
+                        ),
 
 
                        ),
