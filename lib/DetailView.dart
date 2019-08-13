@@ -88,11 +88,11 @@ class DetailView extends StatelessWidget {
               //   autoPlay: false, //default falase
               //   fullScreen: false //default false
               // ),
-              FlutterYoutube.playYoutubeVideoByUrl(
-                apiKey: "AIzaSyADzf8sBxEHO7enNBYLwhtAqlKRpROPj6Q",
-                videoUrl: "https://www.youtube.com/watch?v=-ICZM2CUe9k",
+              // FlutterYoutube.playYoutubeVideoByUrl(
+              //   apiKey: "AIzaSyADzf8sBxEHO7enNBYLwhtAqlKRpROPj6Q",
+              //   videoUrl: "https://www.youtube.com/watch?v=-ICZM2CUe9k",
 
-              ),
+              // ),
 
 
 
