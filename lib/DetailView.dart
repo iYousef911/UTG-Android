@@ -93,6 +93,22 @@ class DetailView extends StatelessWidget {
               //   videoUrl: "https://www.youtube.com/watch?v=-ICZM2CUe9k",
 
               // ),
+              FacebookNativeAd(
+  placementId: "YOUR_PLACEMENT_ID",
+  adType: NativeAdType.NATIVE_AD,
+  width: double.infinity,
+  height: 300,
+  backgroundColor: Colors.blue,
+  titleColor: Colors.white,
+  descriptionColor: Colors.white,
+  buttonColor: Colors.deepPurple,
+  buttonTitleColor: Colors.white,
+  buttonBorderColor: Colors.white,
+  listener: (result, value) {
+    print("Native Ad: $result --> $value");
+  },
+),
+
 
 
 
@@ -121,6 +137,7 @@ Container(
                 },
 
               ),
+              
               
             ),
             
