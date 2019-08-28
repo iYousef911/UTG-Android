@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:utg_flutter/Models/Game.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:transparent_image/transparent_image.dart';
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 
 import 'DetailView.dart';
 import 'ReleasedView.dart';
@@ -95,6 +95,7 @@ class ReleasedView extends StatelessWidget {
                 ),
               ])
       ),
+      
       backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text("Released Games"),
@@ -115,10 +116,12 @@ class ReleasedView extends StatelessWidget {
   }
 }
 
+
 class GameList extends StatelessWidget {
   final List<Game> games;
 
   GameList({Key key, this.games}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -127,6 +130,13 @@ class GameList extends StatelessWidget {
       body: new ListView.builder(
           itemCount: games == null ? 0 : games.length,
           itemBuilder:(BuildContext context, int index) {
+             FacebookInterstitialAd.loadInterstitialAd(
+                      placementId: "365255217325571_668275130356910",
+                      listener: (result, value) {
+                        if (result == InterstitialAdResult.LOADED)
+                          FacebookInterstitialAd.showInterstitialAd(delay: 5000);
+                      },
+                    );
             return InkWell(
               onTap: () {
                 Navigator.push(
@@ -138,6 +148,7 @@ class GameList extends StatelessWidget {
               },
 
               child: Container(
+                 
                 decoration: BoxDecoration(
                   border: Border.all(width: 10, color: Colors.black38),
                   borderRadius: const BorderRadius.all(const Radius.circular(8)),
@@ -146,14 +157,12 @@ class GameList extends StatelessWidget {
                 margin: const EdgeInsets.all(4),
 
                 child: Column(
-
-
-
                   children: <Widget>[
                     CachedNetworkImage(
                           placeholder: (context, url) => CircularProgressIndicator(),
                          imageUrl: "https://ya-techno.com/gamesImage/${games[index].image}",
                         ),
+
 
 //                    Padding(
 //                      padding: const EdgeInsets.all(0.0),
@@ -176,20 +185,24 @@ class GameList extends StatelessWidget {
 //                        ),
 //                      ),
 //
-//                    )
-
+//                    ) 
 
                   ],
+                  
                 ),
+                
 
               ),
+              
 
             );
+            
 
 
 
 
           }
+          
 
 
       ),

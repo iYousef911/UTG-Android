@@ -7,6 +7,11 @@ import 'package:http/http.dart' as http;
 import 'package:utg_flutter/Models/Game.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:flutter/services.dart';
+
+// import com.crashlytics.android.Crashlytics;
+// import io.fabric.sdk.android.Fabric;
+
 
 import 'DetailView.dart';
 import 'ReleasedView.dart';
@@ -33,9 +38,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
 
+void initState(){
+  SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+  ]);
+  // Crashlytics.instance.enableInDevMode = true;
+}
 
   const MyApp({Key key}) : super(key: key);
   @override
+  
 
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -52,6 +65,7 @@ class MyApp extends StatelessWidget {
 }
 class MyHomePage extends StatelessWidget {
   final String title;
+  
 
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -59,6 +73,7 @@ class MyHomePage extends StatelessWidget {
 
 
   @override
+  
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
