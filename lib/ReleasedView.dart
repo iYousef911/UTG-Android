@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:utg_flutter/Models/Game.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:facebook_audience_network/facebook_audience_network.dart';
-
 import 'DetailView.dart';
 import 'ReleasedView.dart';
 import 'SocialMedia.dart';
@@ -97,28 +95,28 @@ class ReleasedView extends StatelessWidget {
                 );
               },
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 250, 0, 0),
-              child: ListTile(
-                leading: Icon(Icons.alternate_email),
-                title: Text(
-                  "Social Accounts",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.white,
-                  ),
-                ),
-                onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SocialMedia(),
-                  ),
-                );
-              },
-              ),
-            ),
+//            Padding(
+//              padding: const EdgeInsets.fromLTRB(0, 250, 0, 0),
+//              child: ListTile(
+//                leading: Icon(Icons.alternate_email),
+//                title: Text(
+//                  "Social Accounts",
+//                  style: TextStyle(
+//                    fontWeight: FontWeight.bold,
+//                    fontSize: 18,
+//                    color: Colors.white,
+//                  ),
+//                ),
+//                onTap: () {
+//                Navigator.push(
+//                  context,
+//                  MaterialPageRoute(
+//                    builder: (context) => SocialMedia(),
+//                  ),
+//                );
+//              },
+//              ),
+//            ),
           ])),
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -150,13 +148,6 @@ class GameList extends StatelessWidget {
       body: new ListView.builder(
           itemCount: games == null ? 0 : games.length,
           itemBuilder: (BuildContext context, int index) {
-            FacebookInterstitialAd.loadInterstitialAd(
-              placementId: "365255217325571_668275130356910",
-              listener: (result, value) {
-                if (result == InterstitialAdResult.LOADED)
-                  FacebookInterstitialAd.showInterstitialAd(delay: 5000);
-              },
-            );
             return InkWell(
               onTap: () {
                 Navigator.push(

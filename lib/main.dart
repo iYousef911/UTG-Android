@@ -132,28 +132,28 @@ class MyHomePage extends StatelessWidget {
               },
             ),
             
-             Padding(
-               padding: const EdgeInsets.fromLTRB(0, 250, 0, 0),
-               child: ListTile(
-                leading: Icon(Icons.alternate_email),
-                title: Text(
-                  "Social Accounts",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.white,
-                  ),
-                ),
-                onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SocialMedia(),
-                  ),
-                );
-              },
-            ),
-             ),
+//             Padding(
+//               padding: const EdgeInsets.fromLTRB(0, 250, 0, 0),
+//               child: ListTile(
+//                leading: Icon(Icons.alternate_email),
+//                title: Text(
+//                  "Social Accounts",
+//                  style: TextStyle(
+//                    fontWeight: FontWeight.bold,
+//                    fontSize: 18,
+//                    color: Colors.white,
+//                  ),
+//                ),
+//                onTap: () {
+//                Navigator.push(
+//                  context,
+//                  MaterialPageRoute(
+//                    builder: (context) => SocialMedia(),
+//                  ),
+//                );
+//              },
+//            ),
+//             ),
           ])),
       backgroundColor: Colors.black,
       appBar: AppBar(

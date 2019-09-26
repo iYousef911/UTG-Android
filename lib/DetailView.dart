@@ -7,15 +7,22 @@ import 'main.dart';
 import 'package:utg_flutter/Models/Game.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:firebase_admob/firebase_admob.dart';
+import 'androidx.multidex.MultiDex';
 
+const String AD_MOB_TEST_DEVICE = 'test_device_id - run ad then check device logs for value';
 class DetailView extends StatelessWidget {
   final Game games;
+
 
   const DetailView({Key key, this.games}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    FirebaseAdMob.instance.initialize(appId: "ca-app-pub-3298644446787962~3632605599");
+    myBanner..load()..show();
+    myInterstitial..load()..show();
+
     return Scaffold(
       backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
       appBar: AppBar(
@@ -86,85 +93,45 @@ class DetailView extends StatelessWidget {
               videoProgressIndicatorColor: Colors.amber,
             ),
           ),
-          FacebookAds(),
-          FacebookNativeAd(
-            placementId: "365255217325571_668274580356965",
-            adType: NativeAdType.NATIVE_BANNER_AD,
-            bannerAdSize: NativeBannerAdSize.HEIGHT_100,
-            width: double.infinity,
-            backgroundColor: Colors.blue,
-            titleColor: Colors.white,
-            descriptionColor: Colors.white,
-            buttonColor: Colors.deepPurple,
-            buttonTitleColor: Colors.white,
-            buttonBorderColor: Colors.white,
-            listener: (result, value) {
-              print("Native Ad: $result --> $value");
-            },
-          ),
+
+
         ],
       ),
     );
   }
 }
 
-class FacebookAds extends StatefulWidget {
-  final Game game;
+MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+  keywords: <String>['UTG - Up To Game', 'Video game tracker'],
+  contentUrl: 'https://flutter.io',
+  birthday: DateTime.now(),
+  childDirected: false,
+  designedForFamilies: false,
+  gender: MobileAdGender.male, // or MobileAdGender.female, MobileAdGender.unknown
+  testDevices: <String>[], // Android emulators are considered test devices
+);
 
-  const FacebookAds({Key key, this.game}) : super(key: key);
+BannerAd myBanner = BannerAd(
+  // Replace the testAdUnitId with an ad unit id from the AdMob dash.
+  // https://developers.google.com/admob/android/test-ads
+  // https://developers.google.com/admob/ios/test-ads
+  adUnitId: "ca-app-pub-3298644446787962/9974652663",
+  size: AdSize.smartBanner,
+  targetingInfo: targetingInfo,
+  listener: (MobileAdEvent event) {
+    print("BannerAd event is $event");
+  },
+);
 
-  @override
-  _FacebookAdsState createState() => _FacebookAdsState();
-}
+InterstitialAd myInterstitial = InterstitialAd(
+  // Replace the testAdUnitId with an ad unit id from the AdMob dash.
+  // https://developers.google.com/admob/android/test-ads
+  // https://developers.google.com/admob/ios/test-ads
+  adUnitId: "ca-app-pub-3298644446787962/3553548696",
+  targetingInfo: targetingInfo,
+  listener: (MobileAdEvent event) {
+    print("InterstitialAd event is $event");
+  },
+);
 
-class _FacebookAdsState extends State<FacebookAds> {
-  Widget _currentAd = SizedBox(
-    height: 0.0,
-    width: 0.0,
-  );
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    setState(() {
-      _currentAd = FacebookBannerAd(
-        placementId: "365255217325571_668274580356965",
-        bannerSize: BannerSize.STANDARD,
-        listener: (result, value) {
-          print("bannerAd: $result --> $value");
-        },
-      );
-    });
-    FacebookAudienceNetwork.init(
-      testingId: "37b1da9d-b48c-4103-a393-2e095e734bd6",
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment(0.5, 1),
-      child: FacebookBannerAd(
-        placementId: "365255217325571_668274580356965",
-        bannerSize: BannerSize.STANDARD,
-        listener: (result, value) {
-          switch (result) {
-            case BannerAdResult.ERROR:
-              print("Error: $value");
-              break;
-            case BannerAdResult.LOADED:
-              print("Loaded: $value");
-              break;
-            case BannerAdResult.CLICKED:
-              print("Clicked: $value");
-              break;
-            case BannerAdResult.LOGGING_IMPRESSION:
-              print("Logging Impression: $value");
-              break;
-          }
-        },
-      ),
-    );
-  }
-}
