@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:utg_flutter/Models/Game.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/services.dart';
 
@@ -12,6 +11,7 @@ import 'package:flutter/services.dart';
 // import io.fabric.sdk.android.Fabric;
 
 import 'DetailView.dart';
+import 'Models/Game.dart';
 import 'ReleasedView.dart';
 import 'SocialMedia.dart';
 

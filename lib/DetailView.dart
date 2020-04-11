@@ -9,7 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:firebase_admob/firebase_admob.dart';
-import 'androidx.multidex.MultiDex';
+
 
 const String AD_MOB_TEST_DEVICE = 'test_device_id - run ad then check device logs for value';
 class DetailView extends StatelessWidget {
@@ -19,6 +19,13 @@ class DetailView extends StatelessWidget {
   const DetailView({Key key, this.games}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    YoutubePlayerController _controller = YoutubePlayerController(
+      initialVideoId: this.games.gameVideo,
+      flags: YoutubePlayerFlags(
+        autoPlay: true,
+        mute: true,
+      ),
+    );
     FirebaseAdMob.instance.initialize(appId: "ca-app-pub-3298644446787962~3632605599");
     myBanner..load()..show();
     myInterstitial..load()..show();
@@ -83,23 +90,52 @@ class DetailView extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: YoutubePlayer(
-              context: context,
-              videoId: games.gameVideo,
-              flags: YoutubePlayerFlags(
-                autoPlay: false,
-                showVideoProgressIndicator: true,
-              ),
-              videoProgressIndicatorColor: Colors.amber,
+//            child: YoutubePlayer(
+//              context: context,
+//              videoId: games.gameVideo,
+//              flags: YoutubePlayerFlags(
+//                autoPlay: false,
+//                showVideoProgressIndicator: true,
+//              ),
+//              videoProgressIndicatorColor: Colors.amber,
+//            ),
+
+          child: YoutubePlayer(
+            controller: _controller,
+            showVideoProgressIndicator: true,
+            progressColors: ProgressBarColors(
+              playedColor: Colors.amber,
+              handleColor: Colors.amberAccent,
             ),
+            progressIndicatorColor: Colors.amber,
+
+
           ),
 
 
+
+
+          ),
+
+
+
+
         ],
-      ),
+
+    ),
+
+
     );
+
+
+
   }
+
+
+
+
 }
+
 
 MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
   keywords: <String>['UTG - Up To Game', 'Video game tracker'],
@@ -133,5 +169,6 @@ InterstitialAd myInterstitial = InterstitialAd(
     print("InterstitialAd event is $event");
   },
 );
+
 
 

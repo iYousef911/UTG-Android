@@ -11,7 +11,7 @@ description: A new Flutter application.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.21+21
+version: 1.0.25+2500
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -24,11 +24,12 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   http: ^0.12.0+2
-  url_launcher: ^3.0.3
-  youtube_player_flutter: ^3.0.0+1
-  cached_network_image: ^1.1.1
+  cached_network_image: ^2.0.0
+  firebase_admob: ^0.9.3
+  youtube_player_flutter: ^6.1.0+4
+  url_launcher: ^5.4.2
   transparent_image: ^1.0.0
-  firebase_admob: ^0.9.0+7
+
 
 
 

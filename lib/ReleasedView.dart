@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:utg_flutter/Models/Game.dart';
+import 'Models/Game.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'DetailView.dart';
 import 'ReleasedView.dart';
