@@ -17,7 +17,7 @@ import 'SocialMedia.dart';
 
 Future<List<Game>> fetchGames(http.Client client) async {
   final response =
-      await client.get('https://ya-techno.com/gameApp/gameData.php');
+      await client.get('http://ya-techno.com/gameApp/gameData.php');
 
   // Use the compute function to run parsePhotos in a separate isolate
   return compute(parseGames, response.body);
