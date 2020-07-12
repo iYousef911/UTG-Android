@@ -95,6 +95,7 @@ dependencies {
     implementation 'com.facebook.android:audience-network-sdk:5.+'
     implementation 'com.android.support:multidex:1.0.2'
     implementation 'com.huawei.agconnect:agconnect-core:1.0.0.300'
+    implementation 'com.google.firebase:firebase-messaging:20.2.2'
 
 }
 apply plugin: 'com.google.gms.google-services'

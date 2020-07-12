@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 // import com.crashlytics.android.Crashlytics;
 // import io.fabric.sdk.android.Fabric;
@@ -14,6 +15,22 @@ import 'DetailView.dart';
 import 'Models/Game.dart';
 import 'ReleasedView.dart';
 import 'SocialMedia.dart';
+Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) {
+  if (message.containsKey('data')) {
+    // Handle data message
+    final dynamic data = message['data'];
+  }
+
+  if (message.containsKey('notification')) {
+    // Handle notification message
+    final dynamic notification = message['notification'];
+  }
+
+  // Or do other work.
+
+}
+
+
 
 Future<List<Game>> fetchGames(http.Client client) async {
   final response =
@@ -33,6 +50,7 @@ List<Game> parseGames(String responseBody) {
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+
   // This widget is the root of your application.
 
   void initState() {
@@ -87,7 +105,7 @@ class MyHomePage extends StatelessWidget {
               decoration: BoxDecoration(
                 image: new DecorationImage(
                   image: new NetworkImage(
-                      "https://ya-techno.com/backgroundImage/tableViewHeader1.jpg"),
+                      "http://ya-techno.com/backgroundImage/tableViewHeader1.jpg"),
                   fit: BoxFit.cover,
                 ),
                 color: Color.fromRGBO(58, 66, 86, 1.0),
@@ -178,6 +196,7 @@ class GameList extends StatelessWidget {
 
   GameList({Key key, this.games}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -212,7 +231,7 @@ class GameList extends StatelessWidget {
                           placeholder: (context, url) =>
                               CircularProgressIndicator(),
                           imageUrl:
-                              "https://ya-techno.com/gamesImage/${games[index].image}",
+                              "http://ya-techno.com/gamesImage/${games[index].image}",
                         ),
                       ),
                     ),
@@ -225,12 +244,15 @@ class GameList extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontSize: 20),
                       ),
+
                     )
                   ],
                 ),
               ),
             );
           }),
+
     );
+
   }
 }
